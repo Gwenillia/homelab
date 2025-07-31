@@ -1,0 +1,59 @@
+services:
+  adguard:
+    image: adguard/adguardhome
+    container_name: adguard
+    volumes:
+      - ./core/adguard/work:/opt/adguardhome/work
+      - ./core/adguard/conf:/opt/adguardhome/conf
+    ports:
+      - "3000:3000"       # Web UI
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80"         # DNS over HTTP
+      - "443:443"       # DNS over HTTPS
+    restart: unless-stopped
+
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./core/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
+    restart: unless-stopped
+
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DB_CONNECTION=sqlite
+      - SPEEDTEST_SCHEDULE=*/30 * * * *
+    volumes:
+      - ./core/speedtest-tracker:/config
+    ports:
+      - "8765:80"
+    restart: unless-stopped
+
+  tailscale:
+    image: tailscale/tailscale
+    container_name: tailscale
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    network_mode: "host"
+    environment:
+      - TS_STATE_DIR=/var/lib/tailscale
+    volumes:
+      - ./core/tailscale/state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    restart: unless-stopped
+
+networks:
+  default:
+    external: false
