@@ -2,7 +2,8 @@
 COMPOSE_FILES = -f docker-compose.core.yml \
                 -f docker-compose.entertainment.yml \
                 -f docker-compose.rss.yml \
-                -f docker-compose.git.yml
+                -f docker-compose.git.yml \
+								-f docker-compose.arcanews.yml
 
 # 🟢 Start all services
 up:

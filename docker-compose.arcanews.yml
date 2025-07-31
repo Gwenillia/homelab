@@ -1,0 +1,19 @@
+services:
+  discord-arcanews-bot:
+    build:
+      context: ./discord-arcanews-bot
+    container_name: discord-arcanews-bot
+    restart: unless-stopped
+    env_file:
+      - ./discord-arcanews-bot/.env
+    depends_on:
+      - discord-arcanews-db
+    volumes:
+      - ./discord-arcanews-bot/discord_arcanews_data:/app/data
+
+  discord-arcanews-db:
+    image: busybox
+    container_name: discord-arcanews-db
+    command: sh -c "mkdir -p /data && tail -f /dev/null"
+    volumes:
+      - ./discord-arcanews-bot/discord_arcanews_data:/data
