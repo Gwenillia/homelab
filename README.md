@@ -75,7 +75,6 @@ docker compose -f docker-compose.git.yml up -d
 This setup assumes your media and downloads directories are outside the Git repo for cleanliness and performance:
 ```bash
 # Recommended folder structure outside the homelab repo:
-~/docker-homelab/
 ~/media/
 ~/downloads/
 ```
@@ -93,7 +92,7 @@ These folders are mounted into containers like jellyfin, radarr, sonarr, etc., v
 | `docker-compose.entertainment.yml` | Media stack (arr + jellyfin)        |
 | `docker-compose.rss.yml`    | RSS feed reader (Miniflux)               |
 | `docker-compose.git.yml`    | Gitea + Database                          |
-| `start.sh`                  | Launches all stacks together             |
+| `Makefile`                  | Different commands to handle everything |
 | `.env.example`              | Template for your environment variables  |
 
 ## 🔐 Secrets & Configuration
