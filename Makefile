@@ -2,7 +2,8 @@
 COMPOSE_FILES = -f docker-compose.core.yml \
                 -f docker-compose.entertainment.yml \
                 -f docker-compose.rss.yml \
-                -f docker-compose.git.yml
+                -f docker-compose.git.yml \
+								-f docker-compose.arcanews.yml
 
 # 🟢 Start all services
 up:
@@ -32,6 +33,9 @@ up-rss:
 
 up-git:
 	docker compose -f docker-compose.git.yml up -d
+
+down-rss:
+	docker compose -f docker-compose.rss.yml down
 
 # 🧹 Clean up everything (containers, networks, volumes, images)
 clean:
