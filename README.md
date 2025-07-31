@@ -8,7 +8,7 @@ This project includes DNS blocking, media automation, RSS reading, Git hosting, 
 
 ```bash
 .
-├── core/                      # Core infrastructure services
+├── core/                     # Core infrastructure services
 │   ├── adguard/              # AdGuard Home for DNS blocking
 │   ├── homepage/             # Dashboard for all services
 │   └── tailscale/            # Secure mesh VPN
@@ -19,7 +19,8 @@ This project includes DNS blocking, media automation, RSS reading, Git hosting, 
 │   ├── bazarr/               # Subtitles
 │   ├── prowlarr/             # Indexers
 │   ├── jellyfin/             # Media server
-│   └── jellyseerr/           # Media request frontend
+│   ├── jellyseerr/           # Media request frontend
+│   └── qbittorrent/          # For the community :) 
 │
 ├── flux/                     # Miscellaneous services
 │   └── miniflux/             # RSS reader
@@ -32,7 +33,7 @@ This project includes DNS blocking, media automation, RSS reading, Git hosting, 
 ├── docker-compose.entertainment.yml
 ├── docker-compose.rss.yml
 ├── docker-compose.git.yml
-├── start.sh
+├── Makefile
 ├── .env.example
 └── README.md
 ```
