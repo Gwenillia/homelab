@@ -10,6 +10,9 @@ services:
       - CREATE_ADMIN=1
       - ADMIN_USERNAME=${MINIFLUX_ADMIN_USER}
       - ADMIN_PASSWORD=${MINIFLUX_ADMIN_PASS}
+      - POLLING_FREQUENCY=30
+      - SCHEDULER_FREQUENCY=1
+      - CLEANUP_ARCHIVE_READ_DAYS=30
     ports:
       - "8081:8080"
     restart: unless-stopped

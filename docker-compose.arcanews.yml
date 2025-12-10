@@ -17,3 +17,12 @@ services:
     command: sh -c "mkdir -p /data && tail -f /dev/null"
     volumes:
       - ./discord-arcanews-bot/discord_arcanews_data:/data
+
+  discord-arcanews-db-web:
+    image: coleifer/sqlite-web
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./discord-arcanews-bot/discord_arcanews_data:/data
+    environment:
+      - SQLITE_DATABASE=/data/wishlist.db

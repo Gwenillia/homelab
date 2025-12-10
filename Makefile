@@ -17,6 +17,18 @@ down:
 logs:
 	docker compose $(COMPOSE_FILES) logs -f
 
+logs-miniflux:
+	docker compose -f docker-compose.rss.yml logs -f
+
+logs-miniflux-db:
+	docker compose -f docker-compose.rss.yml logs -f miniflux-db
+
+logs-arcanews:
+	docker compose -f docker-compose.arcanews.yml logs -f
+
+logs-jellyfin:
+	docker compose -f docker-compose.entertainment.yml logs -f jellyfin
+
 # 🔁 Restart all containers
 restart:
 	docker compose $(COMPOSE_FILES) restart
@@ -33,6 +45,13 @@ up-rss:
 
 up-git:
 	docker compose -f docker-compose.git.yml up -d
+
+up-arcanews:
+	docker compose -f docker-compose.arcanews.yml up -d
+
+# Stop individual stacks
+down-arcanews:
+	docker compose -f docker-compose.arcanews.yml down
 
 # 🧹 Clean up everything (containers, networks, volumes, images)
 clean:
